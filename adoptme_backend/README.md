@@ -9,7 +9,7 @@ npm install
 
 2. Run mongo
 ```bash
-sudo mongod
+sudo mongod --port 8001
 ```
 
 3. Run the app
