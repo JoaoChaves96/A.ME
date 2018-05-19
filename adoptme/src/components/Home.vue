@@ -6,7 +6,9 @@
       </video>
     </div>
     <div>
-      <el-button id="btn">Entrar</el-button>
+      <router-link to="/main">
+        <el-button class="btn">Entrar</el-button>
+      </router-link>
     </div>
   </div>
 
@@ -42,15 +44,18 @@ export default {
     z-index:-1;
   }
 
-  #btn {
+  .btn {
     width:10%;
     position: relative;
     margin-top: 30%;
     margin-left: 45%;
     z-index: 1000;
-    background-color: gold;
+    background-color: #f7b733;
     text-align: center;
-    color: black;
+    color: white;
     border: none;
+    font-family: 'Courier New';
+    font-weight: bold;
+    font-size: 1em;
   }
 </style>

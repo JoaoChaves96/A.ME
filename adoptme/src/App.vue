@@ -24,4 +24,8 @@ export default {
   #logo {
     width: 100%;
   }
+
+  body {
+  background-color: #dfd6e3;
+}
 </style>
