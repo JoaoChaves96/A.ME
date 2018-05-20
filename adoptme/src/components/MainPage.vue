@@ -1,5 +1,6 @@
 <template>
   <div>
+    <custom-header></custom-header>
     <el-row class="firstRow">
       <el-col :span="9" :offset="1">
         <el-input
@@ -17,12 +18,6 @@
             <el-dropdown-item>Action 1</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-      </el-col>
-      <el-col :span="2" :offset="4">
-        <el-button class="btn">Log In</el-button>
-      </el-col>
-      <el-col :span="2" :offset="1">
-        <el-button class="btn">Registar</el-button>
       </el-col>
     </el-row>
     <div class="orangeRows">
@@ -51,8 +46,11 @@
 </template>
 
 <script>
+import CustomHeader from './CustomHeader'
+
 export default {
   name: 'MainPage',
+  components: {CustomHeader},
   data () {
     return {
       search: '',
@@ -67,16 +65,6 @@ export default {
     margin-top: 1%;
   }
 
-  .btn {
-    width:100%;
-    background-color: #f7b733;
-    text-align: center;
-    color: white;
-    border: none;
-    font-weight: bold;
-    font-size: 1em;
-  }
-
   .filter {
     margin-top: 7%;
     font-weight: bold;
@@ -87,7 +75,7 @@ export default {
     cursor: pointer;
   }
   .orangeRows {
-    margin-top: 10%;
+    margin-top: 8%;
     color: #fc4a1a;
     font-size: 1.4em;
   }
