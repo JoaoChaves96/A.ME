@@ -19,7 +19,7 @@
           <el-input placeholder="********" type="password" v-model="registerForm.password"></el-input>
         </el-form-item>
         <el-form-item class="formBtn">
-          <el-button class="btn" type="primary">Registar</el-button>
+          <el-button class="btn" @click="register" type="primary">Registar</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -49,6 +49,23 @@ export default {
         })
         .catch(() => {
         })
+    },
+    register () {
+      let app = this
+      if (this.registerForm.name === '' || this.registerForm.email === '' || this.registerForm.password === '') {
+        alert('Invalid inputs. Try again!')
+      } else {
+        app.axios.post('api/user/create', {
+          name: this.registerForm.name,
+          email: this.registerForm.email,
+          phone: this.registerForm.phone,
+          password: this.registerForm.password
+        })
+          .then(function () {
+            alert('registered successfully')
+            location.reload()
+          })
+      }
     }
   }
 }
