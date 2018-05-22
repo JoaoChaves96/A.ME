@@ -14,6 +14,9 @@
               <el-form-item label="Localização">
                 <el-input class="formInput" v-model="advertForm.location"></el-input>
               </el-form-item>
+            <el-form-item label="Tipo">
+              <el-input class="formInput" v-model="advertForm.type"></el-input>
+            </el-form-item>
               <el-form-item label="Raça">
                 <el-input class="formInput" v-model="advertForm.breed"></el-input>
               </el-form-item>
@@ -73,6 +76,7 @@ export default {
       advertForm: {
         name: '',
         location: '',
+        type: '',
         breed: '',
         sex: '',
         port: '',
@@ -111,13 +115,14 @@ export default {
     },
     createAdvert () {
       let app = this
-      if (this.advertForm.name === '' || this.advertForm.location === '' || this.advertForm.description === '') {
+      if (this.advertForm.name === '' || this.advertForm.type === '' || this.advertForm.location === '' || this.advertForm.description === '') {
         this.$message.error('Os campos "Nome", "Localização" e "Descrição" têm obrigatoriamente que ser preenchidos!')
       } else {
         this.axios.post('api/advert', {
           userId: localStorage.getItem('id'),
           name: this.advertForm.name,
           location: this.advertForm.location,
+          type: this.advertForm.type,
           breed: this.advertForm.breed,
           sex: this.advertForm.sex,
           port: this.advertForm.port,
@@ -125,9 +130,10 @@ export default {
           image: this.advertForm.image,
           description: this.advertForm.description
         })
-          .then(function () {
-            console.log('created!')
+          .then(function (response) {
             app.dialogVisible = false
+            let url = '/advert/' + response.data._id
+            app.$router.push({path: url})
           })
           .catch(function (error) {
             console.log('error: ' + error)
