@@ -13,6 +13,12 @@ exports.create = (req, res) => {
     const advert = new Advert({
         userId: req.body.userId,
         name: req.body.name,
+        location: req.body.location,
+        breed: req.body.breed,
+        sex: req.body.sex,
+        port: req.body.port,
+        fur: req.body.fur,
+        image: req.body.image,
         description: req.body.description
     });
 

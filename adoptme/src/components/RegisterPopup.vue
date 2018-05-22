@@ -9,6 +9,9 @@
         <el-form-item label="Nome">
           <el-input placeholder="John Doe" v-model="registerForm.name"></el-input>
         </el-form-item>
+        <el-form-item label="Localização">
+          <el-input placeholder="ex: Porto" v-model="registerForm.location"></el-input>
+        </el-form-item>
         <el-form-item label="E-mail">
           <el-input placeholder="example@example.com" v-model="registerForm.email"></el-input>
         </el-form-item>
@@ -34,6 +37,7 @@ export default {
       dialogVisible: false,
       registerForm: {
         name: '',
+        location: '',
         email: '',
         phone: '',
         password: ''
@@ -57,6 +61,7 @@ export default {
       } else {
         app.axios.post('api/user/create', {
           name: this.registerForm.name,
+          location: this.registerForm.location,
           email: this.registerForm.email,
           phone: this.registerForm.phone,
           password: this.registerForm.password

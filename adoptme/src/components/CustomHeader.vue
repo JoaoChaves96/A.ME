@@ -11,7 +11,7 @@
       </div>
       <div v-else>
         <el-col :span="3" :offset="15">
-          <el-button class="btn" icon="el-icon-plus">Novo Anúncio</el-button>
+          <new-advert></new-advert>
         </el-col>
         <el-col :span="2">
           <div class="name">
@@ -29,10 +29,11 @@
 <script>
 import LoginPopup from './LoginPopup'
 import RegisterPopup from './RegisterPopup'
+import NewAdvert from './NewAdvert'
 
 export default {
   name: 'CustomHeader',
-  components: {LoginPopup, RegisterPopup},
+  components: {NewAdvert, LoginPopup, RegisterPopup},
   data () {
     return {
       user: {

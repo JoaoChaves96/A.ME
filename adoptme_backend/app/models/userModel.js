@@ -10,6 +10,10 @@ const userSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    location: {
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         match: /^\S+@\S+\.\S+$/,
