@@ -88,13 +88,16 @@ export default {
   },
   methods: {
     handleAvatarSuccess (res, file) {
-      this.advertForm.image = '../assets/' + file.name
+      this.advertForm.image = '/static/' + file.name
       this.imageUrl = URL.createObjectURL(file.raw)
       console.log(this.imageUrl)
     },
     beforeAvatarUpload (file) {
       const isJPG = file.type === 'image/jpeg'
       const isLt2M = file.size / 1024 / 1024 < 2
+
+      console.log('jpg: ' + isJPG)
+      console.log('lt2m: ' + isLt2M)
 
       if (!isJPG) {
         this.$message.error('Avatar picture must be JPG format!')

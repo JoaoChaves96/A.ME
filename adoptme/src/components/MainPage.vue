@@ -34,10 +34,9 @@
     </div>
     <el-row>
       <el-col :span="22" :offset="1">
-        <el-carousel :interval="4000" type="card" height="300px">
+        <el-carousel :interval="3000" type="card" height="300px">
           <el-carousel-item v-for="item in images" :key="item">
-            <h1>{{ item }}</h1>
-            <img :src="item">
+            <img width="100%" :src="item">
           </el-carousel-item>
         </el-carousel>
       </el-col>
@@ -54,7 +53,7 @@ export default {
   data () {
     return {
       search: '',
-      images: ['@/assets/puppy1.png', '@/assets/puppy2.png', '@/assets/puppy3.png', '@/assets/cat1.png']
+      images: ['/static/puppy1.png', '/static/puppy2.png', '/static/puppy3.png', '/static/cat1.png']
     }
   }
 }
