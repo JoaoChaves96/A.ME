@@ -1,6 +1,15 @@
 <template>
   <div>
-    <el-button @click="dialogVisible = true" class="btn">Contactar Anunciante</el-button>
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+    <transition
+      name="custom-classes-transition"
+      enter-active-class="animated bounceInLeft"
+      leave-active-class="animated bounceOutRight"
+    >
+      <div v-if="show">
+        <el-button @click="dialogVisible = true; show = !show" class="btn">Contactar Anunciante</el-button>
+      </div>
+    </transition>
     <el-dialog :visible="dialogVisible"
                width="40%"
                :before-close="handleClose">
@@ -19,12 +28,14 @@ export default {
   name: 'AdvertHeader',
   data () {
     return {
-      dialogVisible: false
+      dialogVisible: false,
+      show: true
     }
   },
   methods: {
     handleClose () {
       this.dialogVisible = false
+      this.show = true
     }
   }
 }

@@ -10,7 +10,9 @@
     </div>
     <div>
       <router-link to="/main">
-        <el-button class="btn">ENTRAR</el-button>
+        <transition ref="test" name="slide-fade">
+          <el-button @click="handleClick" v-if="show" class="btn">ENTRAR</el-button>
+        </transition>
       </router-link>
     </div>
   </div>
@@ -22,8 +24,17 @@ export default {
   name: 'Home',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      show: false
     }
+  },
+  methods: {
+    handleClick () {
+      this.show = false
+    }
+  },
+  mounted: function () {
+    this.show = true
   }
 }
 </script>
@@ -59,5 +70,17 @@ export default {
     font-family: 'Courier New';
     font-weight: bold;
     font-size: 1.8em;
+  }
+
+  .slide-fade-enter-active {
+    transition: all 1s ease;
+  }
+  .slide-fade-leave-active {
+    transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .slide-fade-enter, .slide-fade-leave-to
+    /* .slide-fade-leave-active below version 2.1.8 */ {
+    transform: translateX(1000px);
+    opacity: 0;
   }
 </style>
