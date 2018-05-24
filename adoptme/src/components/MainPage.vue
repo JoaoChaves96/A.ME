@@ -27,16 +27,16 @@
         </el-col>
       </el-row>
       <el-row>
-        <el-col span="22" :offset = "1">
+        <el-col :span="22" :offset = "1">
           <hr>
         </el-col>
       </el-row>
     </div>
     <el-row>
       <el-col :span="22" :offset="1">
-        <el-carousel :interval="3000" type="card" height="300px">
-          <el-carousel-item v-for="item in images" :key="item">
-            <img width="100%" :src="item">
+        <el-carousel :interval="2000" type="card" height="30em">
+          <el-carousel-item class="photo" v-for="item in images" :key="item">
+            <img height="100%" width="100%" :src="item">
           </el-carousel-item>
         </el-carousel>
       </el-col>

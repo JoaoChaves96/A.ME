@@ -2,12 +2,15 @@
   <div>
     <div class="video">
       <video autoplay muted loop>
-        <source src="../assets/home.mp4" type="video/mp4">
+        <source src="../assets/background.mp4" type="video/mp4">
       </video>
+      <audio autoplay loop>
+        <source src="../assets/background.wav" type="audio/wav">
+      </audio>
     </div>
     <div>
       <router-link to="/main">
-        <el-button class="btn">Entrar</el-button>
+        <el-button class="btn">ENTRAR</el-button>
       </router-link>
     </div>
   </div>
@@ -28,15 +31,14 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .video {
-    position:fixed;
+    position: fixed;
     right: 0;
-    margin:0;
-    width:100%;
-    height:100%;
-    overflow: hidden;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
   }
   .video video {
-    position: absolute;
+    position: fixed;
     width: 100% !important;
     height: auto !important;
     background-size: cover;
@@ -46,9 +48,9 @@ export default {
 
   .btn {
     width:10%;
-    position: relative;
-    margin-top: 30%;
-    margin-left: 45%;
+    position: absolute;
+    top: 70%;
+    right: 45%;
     z-index: 1000;
     background-color: #f7b733;
     text-align: center;
@@ -56,6 +58,6 @@ export default {
     border: none;
     font-family: 'Courier New';
     font-weight: bold;
-    font-size: 1em;
+    font-size: 1.8em;
   }
 </style>

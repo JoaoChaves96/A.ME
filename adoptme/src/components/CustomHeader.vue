@@ -15,7 +15,15 @@
         </el-col>
         <el-col :span="2">
           <div class="name">
-            {{ this.user.name }}
+            <el-dropdown @command="handleCommand">
+              <el-button class="btn" type="primary">
+                {{this.user.name}}<i class="el-icon-arrow-down el-icon--right"></i>
+              </el-button>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>Perfil</el-dropdown-item>
+                <el-dropdown-item command="logout">Sair</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
           </div>
         </el-col>
         <el-col :span="2">
@@ -44,6 +52,11 @@ export default {
     }
   },
   methods: {
+    handleCommand (command) {
+      if (command === 'logout') {
+        this.logout()
+      }
+    },
     logout () {
       localStorage.setItem('id', '')
       localStorage.setItem('name', '')
@@ -73,8 +86,25 @@ export default {
   }
 
   .name {
-    margin-top: 10%;
+    margin-top: 0%;
     text-align: center;
   }
+</style>
 
+<style scoped>
+  .el-dropdown {
+    vertical-align: top;
+  }
+
+  .el-dropdown + .el-dropdown {
+    margin-left: 15px;
+  }
+
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
+
+  .el-dropdown {
+    background-color: #f7b733;
+  }
 </style>

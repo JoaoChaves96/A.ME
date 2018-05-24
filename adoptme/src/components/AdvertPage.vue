@@ -3,6 +3,9 @@
       <custom-header></custom-header>
       <el-row class="firstRow">
         <el-col :offset="1" :span="7">
+          <router-link to="/main">
+            <el-button class="back" icon="el-icon-back">Voltar </el-button>
+          </router-link>
           <div class="animalName">
             {{ this.advert.name }}, {{ this.advert.location }}
           </div>
@@ -74,14 +77,12 @@ export default {
     let app = this
 
     app.user = localStorage.getItem('id')
-    console.log(this.user)
 
-    let request = 'api/advert/' + this.$route.params.advertId
+    let request = 'api/anuncio/' + this.$route.params.advertId
 
     this.axios.get(request)
       .then(response => {
         app.advert = response.data
-
         if (app.advert.userId === app.user) {
           console.log('same user')
           app.sameUser = true
@@ -136,5 +137,16 @@ export default {
 
   .sameUser {
     margin-top: 5%
+  }
+
+  .back {
+    width: 20%;
+    background-color: #f7b733;
+    text-align: center;
+    color: white;
+    border: none;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 5%;
   }
 </style>
