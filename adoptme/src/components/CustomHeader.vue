@@ -104,7 +104,7 @@ export default {
   .el-dropdown + .el-dropdown {
     margin-left: 15px;
   }
-  
+
   .el-icon-arrow-down {
     font-size: 12px;
   }
