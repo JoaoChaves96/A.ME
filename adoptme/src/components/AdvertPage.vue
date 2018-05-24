@@ -38,14 +38,18 @@
       <div v-if="!sameUser">
         <el-row>
             <el-col :span="5" :offset="16">
-              <el-button class="btn">Contactar Anunciante</el-button>
+              <advert-popup></advert-popup>
             </el-col>
         </el-row>
         <el-row>
           <el-col :span="13" :offset="1">
-            <div style="word-wrap: break-word;">
-              {{ this.advert.description }}
-            </div>
+            <h3 @click="show = !show"><b class="desc">Descrição</b></h3>
+            <transition name="bounce">
+              <div v-if="show" style="word-wrap: break-word; margin-left: 4%">
+                {{ this.advert.description }}
+                is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+              </div>
+            </transition>
           </el-col>
         </el-row>
       </div>
@@ -63,14 +67,16 @@
 
 <script>
 import CustomHeader from './CustomHeader'
+import AdvertPopup from './AdvertPopup'
 export default {
   name: 'AdvertPage',
-  components: {CustomHeader},
+  components: {CustomHeader, AdvertPopup},
   data () {
     return {
       sameUser: false,
       user: '',
-      advert: {}
+      advert: {},
+      show: true
     }
   },
   mounted () {
@@ -148,5 +154,27 @@ export default {
     font-weight: bold;
     font-size: 1.2em;
     margin-bottom: 5%;
+  }
+
+  .bounce-enter-active {
+    animation: bounce-in 1s;
+  }
+  .bounce-leave-active {
+    animation: bounce-in 1s reverse;
+  }
+  @keyframes bounce-in {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1.5);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .desc {
+    cursor: pointer
   }
 </style>
