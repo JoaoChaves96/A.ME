@@ -20,7 +20,7 @@
                 {{this.user.name}}<i class="el-icon-arrow-down el-icon--right"></i>
               </el-button>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>Perfil</el-dropdown-item>
+                <el-dropdown-item command="profile">Perfil</el-dropdown-item>
                 <el-dropdown-item command="logout">Sair</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -38,10 +38,11 @@
 import LoginPopup from './LoginPopup'
 import RegisterPopup from './RegisterPopup'
 import NewAdvert from './NewAdvert'
+import ProfilePage from './ProfilePage'
 
 export default {
   name: 'CustomHeader',
-  components: {NewAdvert, LoginPopup, RegisterPopup},
+  components: {NewAdvert, LoginPopup, RegisterPopup, ProfilePage},
   data () {
     return {
       user: {
@@ -55,6 +56,8 @@ export default {
     handleCommand (command) {
       if (command === 'logout') {
         this.logout()
+      } else if (command === 'profile') {
+        this.$router.push('/user/' + this.user.id)
       }
     },
     logout () {
@@ -93,18 +96,16 @@ export default {
 
 <style scoped>
   .el-dropdown {
+    background-color: #f7b733;
     vertical-align: top;
+    text-decoration: none;
   }
 
   .el-dropdown + .el-dropdown {
     margin-left: 15px;
   }
-
+  
   .el-icon-arrow-down {
     font-size: 12px;
-  }
-
-  .el-dropdown {
-    background-color: #f7b733;
   }
 </style>

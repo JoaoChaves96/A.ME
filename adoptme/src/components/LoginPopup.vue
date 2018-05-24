@@ -54,8 +54,8 @@ export default {
             localStorage.setItem('id', response.data.user.id)
             localStorage.setItem('name', response.data.user.name)
             localStorage.setItem('email', response.data.user.email)
-            console.log('response')
-            console.log(response)
+            localStorage.setItem('location', response.data.user.location)
+            localStorage.setItem('phone', response.data.user.phone)
             location.reload()
           })
           .catch(function (error) {

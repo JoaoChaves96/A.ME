@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import MainPage from '@/components/MainPage'
 import AdvertPage from '@/components/AdvertPage'
+import ProfilePage from '@/components/ProfilePage'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/advert/:advertId',
       name: 'Advert',
       component: AdvertPage
+    },
+    {
+      path: '/user/:userId',
+      name: 'Profile',
+      component: ProfilePage
     }
   ]
 })
