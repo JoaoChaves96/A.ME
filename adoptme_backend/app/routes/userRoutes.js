@@ -12,4 +12,6 @@ module.exports = (app) => {
 
     //get User
     app.get('/user/:userId', users.get);
+
+    app.put('/user/:userId', users.update);
 }

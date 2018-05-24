@@ -41,6 +41,38 @@ exports.login = async (req, res, next) => {
     }
 };
 
+exports.update = (req, res) => {
+  if(!req.body) {
+    return res.status(400).send({
+        message: "Advert content can not be empty"
+    });
+}
+
+  // Find User and update it with the request body
+  User.findByIdAndUpdate(req.params.userId, {
+      email: req.body.email,
+      phone: req.body.phone,
+      location: req.body.location
+  }, {new: true})
+  .then(user => {
+      if(!user) {
+          return res.status(404).send({
+              message: "User not found with id " + req.params.userId
+          });
+      }
+      res.send(user);
+  }).catch(err => {
+      if(err.kind === 'ObjectId') {
+          return res.status(404).send({
+              message: "User not found with id " + req.params.userId
+          });                
+      }
+      return res.status(500).send({
+          message: "Error updating user with id " + req.params.userId
+      });
+  });
+};
+
 exports.get = async (req, res, next) => {
   try{
     console.log(req.params.userId);
