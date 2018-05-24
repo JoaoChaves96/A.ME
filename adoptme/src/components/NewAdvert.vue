@@ -28,11 +28,11 @@
             <div class="imgDiv">
               <el-upload
                 class="avatar-uploader"
-                action="https://jsonplaceholder.typicode.com/posts/"
+                action="http://jsonplaceholder.typicode.com/photos"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload">
-                <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                <img v-if="this.advertForm.image" :src="this.advertForm.image" class="avatar">
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
             </div>
@@ -88,11 +88,12 @@ export default {
   },
   methods: {
     handleAvatarSuccess (res, file) {
-      this.advertForm.image = '/static/' + file.name
       this.imageUrl = URL.createObjectURL(file.raw)
+      this.advertForm.image = this.imageUrl
       console.log(this.imageUrl)
     },
     beforeAvatarUpload (file) {
+      console.log(file)
       const isJPG = file.type === 'image/jpeg'
       const isLt2M = file.size / 1024 / 1024 < 2
 
@@ -121,7 +122,7 @@ export default {
       if (this.advertForm.name === '' || this.advertForm.type === '' || this.advertForm.location === '' || this.advertForm.description === '') {
         this.$message.error('Os campos "Nome", "Localização" e "Descrição" têm obrigatoriamente que ser preenchidos!')
       } else {
-        this.axios.post('api/advert', {
+        this.axios.post('api/anuncio', {
           userId: localStorage.getItem('id'),
           name: this.advertForm.name,
           location: this.advertForm.location,
@@ -130,7 +131,7 @@ export default {
           sex: this.advertForm.sex,
           port: this.advertForm.port,
           fur: this.advertForm.fur,
-          image: this.advertForm.image,
+          image: this.imageUrl,
           description: this.advertForm.description
         })
           .then(function (response) {

@@ -8,7 +8,7 @@
       <el-row class="results">
         <el-col :span="8" class="results" v-for="o in posts" :key="o.id" :offset="0">
           <el-card :body-style="{padding:'5px'}">
-            <img src="/static/puppy1.png" class="image">
+            <img :src='o.image' class="image">
             <div style="padding: 15px">
               <span> <a :href="'#/advert/'+ o._id"> {{o.name}} </a>, {{o.location}} </span>
               <div class="post-description">
@@ -73,7 +73,7 @@ export default {
     filter () {
       var tempPost = []
 
-      if(this.search){
+      if (this.search) {
         for (var i = 0; i < this.posts.length; i++) {
           let comparison = this.posts[i].type + ' ' + this.posts[i].location
           comparison = comparison.toLowerCase()

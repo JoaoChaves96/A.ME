@@ -38,7 +38,7 @@
                 </el-col>
               </el-row>
             </el-form-item>
-            <el-form-item> <el-button class="edit-btn" type="primary">Editar</el-button> </el-form-item>
+            <el-form-item> <el-button @click.prevent="submitNewData" class="edit-btn" type="primary">Editar</el-button> </el-form-item>
           </el-form>
         </div>
       </el-col>
@@ -63,7 +63,9 @@ export default {
   data () {
     return {
       editForm: {
-        location
+        city: '',
+        email: '',
+        phone: ''
       },
       user: {},
       post: []
@@ -85,6 +87,36 @@ export default {
         })
         .catch(error => {
           console.log('GET request failed with error ' + error)
+        })
+    },
+    submitNewData () {
+      var city, contact, mail
+
+      if (!this.editForm.city) city = localStorage.getItem('location')
+      else city = this.editForm.city
+
+      if (!this.editForm.phone) contact = localStorage.getItem('phone')
+      else contact = this.editForm.phone
+
+      if (!this.editForm.email) mail = localStorage.getItem('email')
+      else mail = this.editForm.email
+
+      this.axios.put('api/user/' + this.user.id,
+        {
+          location: city,
+          phone: contact,
+          email: mail
+        }).then(response => {
+        localStorage.setItem('email', mail)
+        localStorage.setItem('location', city)
+        localStorage.setItem('phone', contact)
+        this.user.email = localStorage.getItem('email')
+        this.user.city = localStorage.getItem('location')
+        this.user.phone = localStorage.getItem('phone')
+        location.reload()
+      })
+        .catch(error => {
+          console.log('PUT request failed with error ' + error)
         })
     }
   }
