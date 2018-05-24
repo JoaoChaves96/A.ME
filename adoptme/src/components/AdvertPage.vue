@@ -38,7 +38,7 @@
       <div v-if="!sameUser">
         <el-row>
             <el-col :span="5" :offset="16">
-              <el-button class="btn">Contactar Anunciante</el-button>
+              <advert-popup></advert-popup>
             </el-col>
         </el-row>
         <el-row>
@@ -63,9 +63,10 @@
 
 <script>
 import CustomHeader from './CustomHeader'
+import AdvertPopup from './AdvertPopup'
 export default {
   name: 'AdvertPage',
-  components: {CustomHeader},
+  components: {CustomHeader, AdvertPopup},
   data () {
     return {
       sameUser: false,

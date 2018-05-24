@@ -10,7 +10,7 @@
         </el-col>
       </div>
       <div v-else>
-        <el-col :span="3" :offset="15">
+        <el-col :span="3" :offset="18">
           <new-advert></new-advert>
         </el-col>
         <el-col :span="2">
@@ -25,9 +25,6 @@
               </el-dropdown-menu>
             </el-dropdown>
           </div>
-        </el-col>
-        <el-col :span="2">
-          <el-button @click="logout" class="btn" icon="el-icon-back">Sair</el-button>
         </el-col>
       </div>
     </el-row>
@@ -104,7 +101,7 @@ export default {
   .el-dropdown + .el-dropdown {
     margin-left: 15px;
   }
-  
+
   .el-icon-arrow-down {
     font-size: 12px;
   }
