@@ -14,7 +14,7 @@
       <el-row class="imgRow">
         <el-col :span="7" :offset="1">
           <div class="image">
-            <img :src="this.advert.image" onerror="this.onerror=null;this.src='http://via.placeholder.com/350x150';">
+            <img width="100%" height="100%" :src="this.advert.image" onerror="this.onerror=null;this.src='http://via.placeholder.com/350x150';">
           </div>
         </el-col>
         <el-col :span="5" :offset="2">
@@ -41,27 +41,17 @@
               <advert-popup></advert-popup>
             </el-col>
         </el-row>
-        <el-row>
-          <el-col :span="13" :offset="1">
-            <h3 @click="show = !show"><b class="desc">Descrição</b></h3>
-            <transition name="bounce">
-              <div v-if="show" style="word-wrap: break-word; margin-left: 4%">
-                {{ this.advert.description }}
-                is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-              </div>
-            </transition>
-          </el-col>
-        </el-row>
       </div>
-      <div v-else>
-        <el-row>
-          <el-col class="sameUser" :span="13" :offset="1">
-            <div style="word-wrap: break-word;">
+      <el-row>
+        <el-col :span="13" :offset="1">
+          <h3 @click="show = !show"><b class="desc">Descrição</b></h3>
+          <transition name="bounce">
+            <div v-if="show" style="word-wrap: break-word; margin-left: 4%">
               {{ this.advert.description }}
             </div>
-          </el-col>
-        </el-row>
-      </div>
+          </transition>
+        </el-col>
+      </el-row>
     </div>
 </template>
 

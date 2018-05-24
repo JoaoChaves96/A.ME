@@ -25,16 +25,9 @@
               </el-form-item>
           </el-col>
           <el-col :span="5" :offset="1">
-            <div class="imgDiv">
-              <el-upload
-                class="avatar-uploader"
-                action="http://jsonplaceholder.typicode.com/photos"
-                :show-file-list="false"
-                :on-success="handleAvatarSuccess"
-                :before-upload="beforeAvatarUpload">
-                <img v-if="this.advertForm.image" :src="this.advertForm.image" class="avatar">
-                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-              </el-upload>
+            <input type="file" id="file" ref="file" accept="image/*" @change="onSelected">
+            <div class="imgDiv" style="margin-top: 10%">
+              <img width="100%" height="100%" :src="imageUrl" v-show="showPreview">
             </div>
           </el-col>
         </el-row>
@@ -61,7 +54,6 @@
           </el-col>
         </el-row>
       </el-form>
-
     </el-dialog>
   </div>
 </template>
@@ -72,7 +64,9 @@ export default {
   data () {
     return {
       dialogVisible: false,
+      imageSelected: null,
       imageUrl: '',
+      showPreview: false,
       advertForm: {
         name: '',
         location: '',
@@ -87,26 +81,35 @@ export default {
     }
   },
   methods: {
+    onSelected (file) {
+      this.imageSelected = this.$refs.file.files[0]
+
+      let reader = new FileReader()
+      this.imageUrl = URL.createObjectURL(this.imageSelected)
+
+      reader.addEventListener('load', function () {
+        this.showPreview = true
+        console.log(this.imageUrl)
+      }.bind(this), false)
+
+      if (this.imageSelected) {
+        /*
+          Ensure the file is an image file.
+        */
+        if (/\.(jpe?g|png|gif)$/i.test(this.imageSelected.name)) {
+          /*
+            Fire the readAsDataURL method which will read the file in and
+            upon completion fire a 'load' event which we will listen to and
+            display the image in the preview.
+          */
+          reader.readAsDataURL(this.imageSelected)
+        }
+      }
+    },
     handleAvatarSuccess (res, file) {
       this.imageUrl = URL.createObjectURL(file.raw)
       this.advertForm.image = this.imageUrl
       console.log(this.imageUrl)
-    },
-    beforeAvatarUpload (file) {
-      console.log(file)
-      const isJPG = file.type === 'image/jpeg'
-      const isLt2M = file.size / 1024 / 1024 < 2
-
-      console.log('jpg: ' + isJPG)
-      console.log('lt2m: ' + isLt2M)
-
-      if (!isJPG) {
-        this.$message.error('Avatar picture must be JPG format!')
-      }
-      if (!isLt2M) {
-        this.$message.error('Avatar picture size can not exceed 2MB!')
-      }
-      return isJPG && isLt2M
     },
     handleClose (done) {
       this.$confirm('Are you sure to close this dialog?')
@@ -197,7 +200,7 @@ export default {
   .imgDiv {
     width: 100%;
     margin-left: 25%;
-    height: 50%;
+    height: 100%;
     overflow: auto;
   }
 </style>
