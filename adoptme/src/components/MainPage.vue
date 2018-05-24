@@ -3,22 +3,21 @@
     <custom-header></custom-header>
     <el-row class="firstRow">
       <el-col :span="9" :offset="1">
-        <el-input
-          placeholder="ex: Cão Braga"
-          suffix-icon="el-icon-search"
-          v-model="search">
-        </el-input>
+        <el-input placeholder="ex: Cão Braga" suffix-icon="el-icon-search" v-model="search" @change="filter"> </el-input>
       </el-col>
-      <el-col :span="3" :offset="1">
-        <el-dropdown class="filter">
-          <span class="el-dropdown-link">
-            Filtrar pesquisa<i class="el-icon-arrow-down el-icon--right"></i>
-          </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>Action 1</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-      </el-col>
+      <el-row class="results">
+        <el-col :span="8" class="results" v-for="o in posts" :key="o.id" :offset="0">
+          <el-card :body-style="{padding:'5px'}">
+            <img src="/static/puppy1.png" class="image">
+            <div style="padding: 15px">
+              <span> <a :href="'#/advert/'+ o._id"> {{o.name}} </a>, {{o.location}} </span>
+              <div class="post-description">
+                <span> {{o.description}}</span>
+              </div>
+            </div>
+          </el-card>
+        </el-col>
+      </el-row>
     </el-row>
     <div class="orangeRows">
       <el-row>
@@ -53,7 +52,41 @@ export default {
   data () {
     return {
       search: '',
-      images: ['/static/puppy1.png', '/static/puppy2.png', '/static/puppy3.png', '/static/cat1.png']
+      images: ['/static/puppy1.png', '/static/puppy2.png', '/static/puppy3.png', '/static/cat1.png'],
+      posts: []
+    }
+  },
+  mounted () {
+    this.getAllPosts()
+  },
+  methods: {
+    getAllPosts () {
+      this.axios.get('api/anuncios')
+        .then(response => {
+          console.log(response)
+          this.posts = response.data
+        })
+        .catch(error => {
+          console.log('GET request failed with error ' + error)
+        })
+    },
+    filter () {
+      var tempPost = []
+
+      if(this.search){
+        for (var i = 0; i < this.posts.length; i++) {
+          let comparison = this.posts[i].type + ' ' + this.posts[i].location
+          comparison = comparison.toLowerCase()
+          if (comparison.includes(this.search.toLowerCase())) {
+            console.log('tem')
+            tempPost.push(this.posts[i])
+          }
+        }
+
+        this.posts = tempPost
+      } else {
+        this.posts = this.getAllPosts()
+      }
     }
   }
 }
@@ -62,6 +95,16 @@ export default {
 <style scoped>
   .firstRow {
     margin-top: 1%;
+  }
+
+  .image {
+    width: 100%;
+    display: block;
+  }
+
+  .post-description{
+    margin-top: 13px;
+    line-height: 12px;
   }
 
   .filter {
@@ -97,5 +140,15 @@ export default {
 
   .el-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
+  }
+  .el-row.results{
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  .el-col.results {
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
   }
 </style>
