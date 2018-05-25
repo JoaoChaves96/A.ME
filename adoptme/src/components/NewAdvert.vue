@@ -87,6 +87,8 @@ export default {
       let reader = new FileReader()
       this.imageUrl = URL.createObjectURL(this.imageSelected)
 
+      this.advertForm.image = '/static/' + this.imageSelected.name
+
       reader.addEventListener('load', function () {
         this.showPreview = true
         console.log(this.imageUrl)
@@ -105,11 +107,6 @@ export default {
           reader.readAsDataURL(this.imageSelected)
         }
       }
-    },
-    handleAvatarSuccess (res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw)
-      this.advertForm.image = this.imageUrl
-      console.log(this.imageUrl)
     },
     handleClose (done) {
       this.$confirm('Are you sure to close this dialog?')
@@ -134,7 +131,7 @@ export default {
           sex: this.advertForm.sex,
           port: this.advertForm.port,
           fur: this.advertForm.fur,
-          image: this.imageUrl,
+          image: this.advertForm.image,
           description: this.advertForm.description
         })
           .then(function (response) {
