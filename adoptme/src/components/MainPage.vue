@@ -1,6 +1,15 @@
 <template>
   <div>
     <custom-header></custom-header>
+    <el-row>
+      <el-col :span="22" :offset="1">
+        <el-carousel :interval="2000" type="card" height="30em">
+          <el-carousel-item class="photo" v-for="item in images" :key="item">
+            <img height="100%" width="100%" :src="item">
+          </el-carousel-item>
+        </el-carousel>
+      </el-col>
+    </el-row>
     <el-row class="firstRow">
       <el-col :span="9" :offset="1">
         <el-input placeholder="ex: Cão Braga" suffix-icon="el-icon-search" v-model="search" @change="filter"> </el-input>
@@ -18,27 +27,6 @@
           </el-card>
         </el-col>
       </el-row>
-    </el-row>
-    <div class="orangeRows">
-      <el-row>
-        <el-col :span="12" :offset="1">
-          Mais Antigos
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="22" :offset = "1">
-          <hr>
-        </el-col>
-      </el-row>
-    </div>
-    <el-row>
-      <el-col :span="22" :offset="1">
-        <el-carousel :interval="2000" type="card" height="30em">
-          <el-carousel-item class="photo" v-for="item in images" :key="item">
-            <img height="100%" width="100%" :src="item">
-          </el-carousel-item>
-        </el-carousel>
-      </el-col>
     </el-row>
   </div>
 </template>
@@ -120,6 +108,10 @@ export default {
     margin-top: 8%;
     color: #fc4a1a;
     font-size: 1.4em;
+  }
+
+  .el-card {
+    height: 300px;
   }
 
   hr {
