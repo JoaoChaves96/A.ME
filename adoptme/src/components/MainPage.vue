@@ -87,6 +87,7 @@ export default {
 
   .image {
     width: 100%;
+    height: 30%;
     display: block;
   }
 
@@ -111,7 +112,7 @@ export default {
   }
 
   .el-card {
-    height: 300px;
+    height: auto;
   }
 
   hr {
